@@ -1,0 +1,17 @@
+os:
+  - linux
+  - osx
+language: node_js
+node_js:
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - node
+install: npm install
+before_script:
+  - "npm run build"
+after_success:
+  - ./node_modules/.bin/istanbul report text-summary lcov
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls

@@ -1,0 +1,92 @@
+{
+  "name": "js-cache-tags",
+  "description": "Simple and fast memory cache with tags support for Javascript/NodeJS projects.",
+  "keywords": [
+    "cache tags",
+    "cachetags",
+    "javascript cache tags",
+    "js cache tags",
+    "node cache tags",
+    "memcached tags",
+    "object cache tags",
+    "memory cache tags"
+  ],
+  "tags": [
+    "cache tags",
+    "cachetags",
+    "javascript cache tags",
+    "js cache tags",
+    "node cache tags",
+    "memcached tags",
+    "object cache tags",
+    "memory cache tags"
+  ],
+  "version": "1.0.0",
+  "author": "Viresh Shah <vireshshah@gmail.com>",
+  "maintainers": [
+    {
+      "name": "Viresh Shah",
+      "email": "vireshshah@gmail.com",
+      "url": "https://github.com/vireshshah"
+    }
+  ],
+  "main": "./dist/js-cache-tags.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vireshshah/js-cache-tags.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.4.6"
+  },
+  "scripts": {
+    "build": "webpack --env dev && webpack --env build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "node-cache": "^4.2.0",
+    "lodash.some": "4.6.0",
+    "lodash.isobject": "3.0.2",
+    "lodash.template": "4.4.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.1.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "yargs": "^12.0.1",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "jest": "^23.4.2"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "verbose": true,
+    "bail": true,
+    "notify": true,
+    "coverageReporters": [
+      "html",
+      "json",
+      "lcov"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
+      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+    ],
+    "testEnvironment": "node",
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node"
+    ]
+  }
+}
