@@ -8,6 +8,8 @@ environment:
     - nodejs_version: "8"
     - nodejs_version: "9"
     - nodejs_version: "10"
+  COVERALLS_REPO_TOKEN:
+    secure: 1ZvRCTmU+AlMRfn2ookHq60mYXNh7ViToaBHI2yqDw4w4eaO3nEh+dt7ne/SN7gI
 pull_requests:
   do_not_increment_build_number: true
 
