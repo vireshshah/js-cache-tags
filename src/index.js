@@ -10,6 +10,7 @@ class JSCacheTags extends NodeCache {
         this.ERRORS["TAGS_TYPE"] = _template("The tags argument has to be an array.");
         this.ERRORS["TTL_TYPE"] =  _template("The ttl argument has to be of type `number`. Found: `<%= type %>`");
         this.ERRORS["TTL_NEGATIVE"] =  _template("The ttl argument cannot be negative.");
+        this.ERRORS["TAGS_NOT_FOUND"] = _template("Tags not found.");
     }
 
     set = (key, value, tags = undefined, ttl, cb) => {
@@ -56,7 +57,7 @@ class JSCacheTags extends NodeCache {
                 } else {
                     valueWithTags = value;
                 }
-                if (cb != undefined && cb !== null) {
+                if (cb !== undefined && cb !== null) {
                     cb(undefined, valueWithTags);
                 }
                 return valueWithTags;
@@ -74,6 +75,51 @@ class JSCacheTags extends NodeCache {
         }, errorOnMissing);
     };
 
+    getByTags = (tags, cb, errorOnMissing = false) => {
+        let values = [], i, tag, len, error;
+        if (!Array.isArray(tags)) {
+            tags = [tags];
+        }
+        for (i = 0, len = tags.length; i < len; i++) {
+            tag = tags[i];
+            let data = this.data;
+            for (var key in data) {
+                let value = this._unwrap(data[key]);
+
+                if (value.tags) {
+                    let found = false;
+                    if (isObject(tag)) {
+                        found = some(value.tags, tag);
+                    } else {
+                        found = value.tags.includes(tag);
+                    }
+                    if (found) {
+                        values.push(value.value);
+                    }
+                }
+            }
+        }
+
+        if (values.length) {
+             if (cb !== undefined) {
+                cb(undefined, values);
+             }
+             return values;
+        } else {
+            error = this._error("TAGS_NOT_FOUND");
+            if (cb === undefined && !errorOnMissing) {
+                return values;
+            }
+            else if (cb !== undefined && !errorOnMissing) {
+                cb(error);
+                return values;
+            }
+            else {
+                throw error;
+            }
+        }
+    };
+  
     delByTags = (tags, cb) => {
         let delCount = 0, i, tag, len;
         if (!Array.isArray(tags)) {

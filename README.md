@@ -52,8 +52,8 @@ Returns `true` on success.
 ```js
 obj = { name: "Viresh", age: 35 };
 tags = ["tech geek", "foodie"]
-myCache.set("myKey", obj, tags, 100, function(err, success){
-  if(!err && success) {
+myCache.set("myKey", obj, tags, 100, (err, success) => {
+  if (!err && success) {
     console.log(success);
     // true
     // ... do something ...
@@ -65,7 +65,7 @@ myCache.set("myKey", obj, tags, 100, function(err, success){
 ```js
 obj = { name: "Viresh", age: 30 };
 tags = [{"city": "Pune"}, {"country": "India"}]
-success = myCache.set( "myKey", obj, tags, 1000 );
+success = myCache.set("myKey", obj, tags, 1000);
 ```
 
 ## Retrieve a key (GET):
@@ -73,11 +73,11 @@ success = myCache.set( "myKey", obj, tags, 1000 );
 `myCache.get(key, [callback], [errorOnMissing])`
 
 Gets a saved value from the cache. Returns a `undefined` if not found or expired.
-If the value was found it returns an object with the `key` `value` pair.
+If the value was found then it returns an object with `value`.
 
 ```js
 try {
-    myCache.get("myKey", function( err, value ){
+    myCache.get("myKey", (err, value) => {
         if (!err) {
             if (value == undefined) {
                 // key not found
@@ -88,9 +88,38 @@ try {
             }
         }
     });
- } catch(err){
+ } catch(err) {
     // ENOTFOUND: Key `not-existing-key` not found
  }
+```
+
+## GET by tags (GetByTags):
+
+`myCache.getByTags(tags, [callback], [errorOnMissing])`
+
+Gets the items from cache by tags. Returns an empty array if not found. If the tag
+was found then it returns `array of values` for which tag was matched.
+
+### GET Example 1
+```js
+myCache.getByTags(["tech geek"], (err, values) => {
+    if (!err) {
+        console.log(values);
+        //[{ name: "Viresh", age: 35 }];
+        // ... do something ...
+    }
+});
+```
+
+### GET Example 2
+```js
+myCache.getByTags([{"city": "Pune"}], (err, values) => {
+    if (!err) {
+        console.log(values);
+        //[{ name: "Viresh", age: 35 }];
+        // ... do something ...
+    }
+});
 ```
 
 ## Delete by tags (DEL):
@@ -133,4 +162,4 @@ myCache.delByTags([123, 456], (err, count) => {
 
 js-cache-tags is extension to node-cache library (https://github.com/mpneuried/nodecache). Many thanks to Mathias Peter.
 
-##### Copyright © 2018 Viresh Shah, http://www.vireshshah.com
+##### Happy Coding! Viresh Shah (http://www.vireshshah.com)
