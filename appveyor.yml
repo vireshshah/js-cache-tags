@@ -3,11 +3,11 @@
 # Test against these versions of Node.js.
 environment:
   matrix:
-    - nodejs_version: "6"
-    - nodejs_version: "7"
     - nodejs_version: "8"
     - nodejs_version: "9"
     - nodejs_version: "10"
+    - nodejs_version: "11"
+    - nodejs_version: "12"
   COVERALLS_REPO_TOKEN:
     secure: 1ZvRCTmU+AlMRfn2ookHq60mYXNh7ViToaBHI2yqDw4w4eaO3nEh+dt7ne/SN7gI
 pull_requests:
