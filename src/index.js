@@ -13,7 +13,7 @@ class JSCacheTags extends NodeCache {
         this.ERRORS["TAGS_NOT_FOUND"] = _template("Tags not found.");
     }
 
-    set = (key, value, tags = undefined, ttl, cb) => {
+    set(key, value, tags = undefined, ttl, cb) {
         let valueWithTags = value, error;
         if (tags !== undefined) {
             if (!Array.isArray(tags)) {
@@ -48,7 +48,7 @@ class JSCacheTags extends NodeCache {
         return super.set(key, valueWithTags, ttl, cb);
     };
 
-    get = (key, cb, errorOnMissing = false) => {
+    get(key, cb, errorOnMissing = false) {
         return super.get(key, (err, value) => {
             if (!err && value !== undefined) {
                 let valueWithTags;
@@ -75,7 +75,7 @@ class JSCacheTags extends NodeCache {
         }, errorOnMissing);
     };
 
-    getByTags = (tags, cb, errorOnMissing = false) => {
+    getByTags(tags, cb, errorOnMissing = false) {
         let values = [], i, tag, len, error;
         if (!Array.isArray(tags)) {
             tags = [tags];
@@ -120,7 +120,7 @@ class JSCacheTags extends NodeCache {
         }
     };
   
-    delByTags = (tags, cb) => {
+    delByTags(tags, cb) {
         let delCount = 0, i, tag, len;
         if (!Array.isArray(tags)) {
             tags = [tags];
